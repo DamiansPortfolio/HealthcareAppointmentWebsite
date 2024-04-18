@@ -1,13 +1,12 @@
 const express = require("express");
 const cors = require("cors");
-const pool = require("./config/db");
+const userRoutes = require("./routes/api"); // Adjust the path according to your project structure
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const apiRoutes = require("./routes/api");
-app.use("/api", apiRoutes);
+app.use("/api", userRoutes); // This line connects your '/api/users' endpoint
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
