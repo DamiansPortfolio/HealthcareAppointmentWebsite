@@ -1,32 +1,35 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes, // 'Switch' is replaced by 'Routes' in v6
+  Route,
+  Link,
+} from "react-router-dom";
+import HomePage from "./HomePage"; // Ensure this component is properly defined
+import AboutPage from "./AboutPage"; // Optional: Example component
 
 function App() {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("/api/users") // Endpoint to fetch users; adjust according to your actual API
-      .then((response) => {
-        setUsers(response.data);
-      })
-      .catch((error) => console.log("Error fetching data", error));
-  }, []);
-
   return (
-    <div>
-      <h1>Users List</h1>
-      <ul>
-        {users.map((user) => (
-          <li key={user.user_id}>
-            ID: {user.user_id}, Name: {user.first_name} {user.middle_name}{" "}
-            {user.last_name}, DOB: {user.date_of_birth}, Sex: {user.sex}, Email:{" "}
-            {user.email}, Address: {user.street}, {user.city}, {user.state},{" "}
-            {user.zip}, Phone: {user.phone_number}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link> // Just an example link
+            </li>
+          </ul>
+        </nav>
+
+        {/* 'Switch' is replaced with 'Routes' which is used to define all the Route components */}
+        <Routes>
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
