@@ -1,27 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
 
 const LoginForm = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate(); // Initialize navigate function
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("/api/login", { username, password });
+      if (response.data.success) {
+        navigate("/patient-portal"); // Redirect to the patient portal page on success
+      } else {
+        alert(response.data.message); // Or handle errors more gracefully
+      }
+    } catch (error) {
+      // Make sure to handle errors that may not have a response attached
+      const message = error.response
+        ? error.response.data.message
+        : error.message;
+      alert("Login failed: " + message);
+    }
+  };
+
   return (
-    <Form className="login-form">
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+    <Form onSubmit={handleSubmit}>
+      <Form.Group className="mb-3" controlId="formUsername">
         <Form.Label>Username:</Form.Label>
-        <Form.Control type="text" placeholder="Enter username" />
+        <Form.Control
+          type="text"
+          placeholder="Enter username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
+      <Form.Group className="mb-3" controlId="formPassword">
         <Form.Label>Password:</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
+        <Form.Control
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </Form.Group>
 
       <Button variant="primary" type="submit">
         Submit
       </Button>
-
-      <div className="forgot-links">
-        <a href="#forgot-username">Forgot Username?</a>
-        <a href="#forgot-password">Forgot Password?</a>
-      </div>
     </Form>
   );
 };

@@ -4,6 +4,7 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import HomePage from "./HomePage";
 import AboutPage from "./AboutPage";
 import "./App.css"; // Make sure the path is correct
+import PatientPortal from "./components/PatientPortal";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="/contact" element={<div>Contact Page</div>} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/" element={<HomePage />} />
+          <Route path="/patient-portal" element={<PatientPortal />} />
         </Routes>
       </Container>
     </Router>
