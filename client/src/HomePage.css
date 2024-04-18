@@ -1,0 +1,21 @@
+.home-container {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background: #f7f7f7; /* light grey background */
+}
+
+.home-card {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+}
+
+.home-title {
+  color: #007bff; /* Bootstrap primary blue */
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.home-text {
+  color: #555; /* medium-dark grey */
+  font-size: 16px;
+}
