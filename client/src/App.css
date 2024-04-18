@@ -12,39 +12,70 @@ button,
 input,
 textarea {
   font-family: Arial, sans-serif; /* Ensuring Arial is used throughout */
+  margin: 0; /* Reset default margin */
+}
+
+html,
+#root {
+  height: 100%; /* Ensure root element takes full height */
 }
 
 /* Navbar specific styles */
 .navbar {
   background-color: #007bff; /* A shade of blue */
-  border-bottom: 2px solid #0056b3; /* A darker shade of blue for contrast */
+  color: white; /* Ensuring text is white */
+  margin-bottom: 0; /* No margin below navbar */
 }
 
 .navbar-dark .navbar-brand,
 .navbar-dark .nav-link {
-  color: #ffffff; /* White text */
+  color: #ffffff !important; /* White text */
 }
 
-/* Button styles across the application */
-.btn {
-  background-color: #ffffff; /* White background */
-  color: #000000; /* Black text */
-  border-radius: 5px; /* Rounded corners */
+/* Adjustments for Nav.Link that behaves like a button */
+.navbar .nav-link.btn-light,
+.navbar .btn-light {
+  /* Adjust for both .nav-link and .btn */
+  background-color: #ffffff !important; /* White background */
+  color: #000000 !important; /* Black text */
+  border-radius: 20px; /* Rounded corners, adjust as needed */
   border: 1px solid #000; /* Black border */
+  padding: 5px 10px; /* Add padding */
 }
 
-.btn:hover {
-  color: #007bff; /* Change text color to blue on hover */
+/* Hover effect for Nav.Link that behaves like a button */
+.navbar .nav-link.btn-light:hover,
+.navbar .btn-light:hover {
+  /* Adjust for both .nav-link and .btn */
+  color: #007bff !important; /* Change text color to blue on hover */
   background-color: #e7f0fd; /* Very light blue background on hover */
 }
 
-/* Optional: Additional button styling for non-navbar buttons */
-.button-primary {
-  background-color: #007bff; /* Blue background */
-  color: #ffffff; /* White text */
+/* Main content */
+.flex-grow-1 {
+  flex-grow: 1; /* Grow to take up available space */
 }
 
-.button-primary:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-  color: #ffffff; /* White text */
+.main-content {
+  background-color: #f0f0f0; /* Main content area color */
+  padding: 20px; /* Padding around main content */
+  min-height: calc(100vh - 56px); /* Adjust height based on navbar size */
 }
+
+/* Footer styling */
+.footer {
+  background-color: #0056b3; /* Dark blue background */
+  color: white;
+  padding: 10px 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%; /* Footer takes full width */
+}
+
+/* Login section styling */
+.login-section {
+  padding: 20px; /* Spacing around the login form */
+  background-color: #e9ecef; /* Bootstrap's light grey for the sidebar */
+}
+
+/* Add custom styles below as necessary */

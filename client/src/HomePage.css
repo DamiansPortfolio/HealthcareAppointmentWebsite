@@ -1,21 +1,37 @@
-.home-container {
-  padding-top: 50px;
-  padding-bottom: 50px;
-  background: #f7f7f7; /* light grey background */
+.home-page {
+  min-height: 100vh; /* Full viewport height */
+  background-color: #f0f0f0; /* Off-white background */
 }
 
-.home-card {
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 8px;
+.top-section {
+  background-color: #007bff; /* Blue background */
+  color: white;
+  padding: 20px;
 }
 
-.home-title {
-  color: #007bff; /* Bootstrap primary blue */
-  font-size: 24px;
-  font-weight: bold;
+.main-section {
+  padding: 20px;
 }
 
-.home-text {
-  color: #555; /* medium-dark grey */
-  font-size: 16px;
+.bottom-navigation {
+  background-color: #0056b3; /* Darker shade of blue */
+  color: white;
+  padding: 20px;
+}
+
+.login-form {
+  background-color: white; /* White form background */
+  padding: 20px;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.forgot-links a {
+  display: block;
+  color: #007bff;
+  margin-top: 10px;
+}
+
+.forgot-links a:hover {
+  text-decoration: underline;
 }
