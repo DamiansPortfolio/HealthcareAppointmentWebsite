@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import HomePage from "./HomePage";
 import AboutPage from "./AboutPage";
-import "./App.css"; // Make sure the path is correct
 import PatientPortal from "./components/PatientPortal";
+import RegistrationPage from "./components/RegistrationPage"; // Import the registration page component
+import "./App.css"; // Make sure the path is correct
 
 function App() {
   return (
@@ -29,8 +30,11 @@ function App() {
               <Nav.Link as={Link} to="/about" style={{ color: "white" }}>
                 About
               </Nav.Link>
+              <Nav.Link as={Link} to="/register" style={{ color: "white" }}>
+                Register
+              </Nav.Link>{" "}
+              {/* Add registration link */}
             </Nav>
-            {/* Align right for the contact button - if needed */}
             <Nav>
               <Nav.Link as={Link} to="/contact" className="btn btn-light">
                 Contact Us
@@ -46,6 +50,8 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/patient-portal" element={<PatientPortal />} />
+          <Route path="/register" element={<RegistrationPage />} />{" "}
+          {/* Define the route for registration */}
         </Routes>
       </Container>
     </Router>
