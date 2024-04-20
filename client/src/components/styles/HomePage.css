@@ -1,0 +1,28 @@
+/* HomePage.css */
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* If you want the page to be at least viewport height */
+  background-color: #f5f5f5; /* Grey background */
+}
+
+.top-section {
+  background-color: #007bff; /* Blue background */
+  color: white;
+  padding: 20px;
+}
+
+.main-section {
+  padding: 20px;
+}
+
+.forgot-links a {
+  display: block;
+  color: #007bff;
+  margin-top: 10px;
+}
+
+.forgot-links a:hover {
+  text-decoration: underline;
+}
