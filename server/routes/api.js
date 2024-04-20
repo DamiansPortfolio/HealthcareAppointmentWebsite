@@ -19,7 +19,7 @@ router.post("/register", async (req, res) => {
     zip_code,
     email,
     facility_number,
-    ssn, // Make sure to capture this from the request body
+    ssn,
   } = req.body;
 
   try {
@@ -27,7 +27,7 @@ router.post("/register", async (req, res) => {
       "INSERT INTO users (username, password, first_name, middle_name, last_name, sex, date_of_birth, phone_number, street, city, state, zip_code, email, facility_number, ssn) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *",
       [
         username,
-        password,
+        password, // Directly using the unhashed password for simplicity during tests
         first_name,
         middle_name,
         last_name,
@@ -41,7 +41,7 @@ router.post("/register", async (req, res) => {
         email,
         facility_number,
         ssn,
-      ] // Include ssn here
+      ]
     );
     res.json({
       success: true,
@@ -53,6 +53,7 @@ router.post("/register", async (req, res) => {
     res.status(500).send("Server error");
   }
 });
+
 // User Login Endpoint
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
@@ -79,8 +80,13 @@ router.post("/login", async (req, res) => {
       "Stored password:",
       user.password
     );
+
     if (password === user.password) {
-      res.json({ success: true, message: "Login successful" });
+      res.json({
+        success: true,
+        message: "Login successful",
+        user_type_id: user.user_type_id, // Assuming 'user_type_id' is a column in your 'users' table
+      });
     } else {
       return res
         .status(401)

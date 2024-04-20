@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import logo from "./images/AD-HEALTH-LOGO.png"; // Make sure the path is correct
 import "./styles/HomeNavbar.css"; // Ensure correct path to CSS file
 
-class TopNavbar extends React.Component {
+class HomeNavBar extends React.Component {
   render() {
     return (
       <Navbar expand="lg" className="navbar-mainbg" variant="dark">
@@ -22,7 +22,7 @@ class TopNavbar extends React.Component {
             className="justify-content-end"
           >
             <Nav>
-              <NavDropdown title="User Login" id="portal-nav-dropdown">
+              <NavDropdown title="Services" id="portal-nav-dropdown">
                 <NavDropdown.Item as={Link} to="/patient-login-page">
                   Patient Login
                 </NavDropdown.Item>
@@ -32,9 +32,21 @@ class TopNavbar extends React.Component {
               </NavDropdown>
               <NavDropdown title="Locations" id="locations-nav-dropdown">
                 {/* Placeholder for locations */}
+                <NavDropdown.Item as={Link} to="/patient-login-page">
+                  Towson
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/staff-login-page">
+                  Reisterstown
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/patient-login-page">
+                  Whitemarsh
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/staff-login-page">
+                  Cockeysville
+                </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link as={Link} to="/register">
-                Register
+              <Nav.Link as={Link} to="/Appointment">
+                Book Appointment
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
@@ -44,4 +56,4 @@ class TopNavbar extends React.Component {
   }
 }
 
-export default TopNavbar;
+export default HomeNavBar;

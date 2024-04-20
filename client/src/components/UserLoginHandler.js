@@ -1,28 +1,41 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
+import { useNavigate } from "react-router-dom"; // Necessary for redirection
 
-const PatientLoginHandler = () => {
+const UserLoginHandler = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // Initialize navigate function
+  const navigate = useNavigate(); // Initialize the navigation function
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post("/api/login", { username, password });
+      console.log(response.data); // Log the full response data
       if (response.data.success) {
-        navigate("/patient-portal"); // Redirect to the patient portal page on success
+        const userType = parseInt(response.data.user_type_id, 10); // Ensure it's an integer
+        switch (userType) {
+          case 1:
+            navigate("/patient-portal");
+            break;
+          case 2:
+            navigate("/staff-portal");
+            break;
+          case 3:
+            navigate("/manager-portal");
+            break;
+          default:
+            alert("Invalid user type: " + response.data.user_type_id); // Alert invalid user type
+        }
       } else {
-        alert(response.data.message); // Or handle errors more gracefully
+        alert(response.data.message); // Display login error message
       }
     } catch (error) {
-      // Make sure to handle errors that may not have a response attached
       const message = error.response
         ? error.response.data.message
-        : error.message;
-      alert("Login failed: " + message);
+        : "Login failed with network or server error.";
+      alert(message); // Display network or server error message
     }
   };
 
@@ -52,7 +65,7 @@ const PatientLoginHandler = () => {
             </Form.Group>
 
             <Button variant="primary" type="submit" className="w-100">
-              Submit
+              Login
             </Button>
           </Form>
         </Col>
@@ -61,4 +74,4 @@ const PatientLoginHandler = () => {
   );
 };
 
-export default PatientLoginHandler;
+export default UserLoginHandler;

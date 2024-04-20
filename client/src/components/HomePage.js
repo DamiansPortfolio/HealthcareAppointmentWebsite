@@ -1,22 +1,27 @@
 import React from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import BottomNav from "./BottomNavbar"; // Assuming you have this component
+import { Container, Row, Col } from "react-bootstrap";
+import NavBar from "./NavigationBar";
+import BottomNav from "./BottomNavbar";
+import UserLoginHandler from "./UserLoginHandler";
 
-import "./styles/HomePage.css"; // Ensure this CSS file is correctly linked
+import "./styles/HomePage.css"; // Ensure this path is correct
 import "../App.css";
-import HomeNavBar from "./HomeNavBar";
 
 const HomePage = () => {
   return (
     <Container fluid className="home-page">
-      <HomeNavBar />
-      <Row className="flex-grow-1">
-        <Col md={8} className="main-area">
-          MAIN AREA {/* Placeholder for main content */}
+      <NavBar />
+      <Row className="justify-content-start my-4">
+        {" "}
+        {/* Changed to 'justify-content-start' */}
+        <Col xs={12} md={6} lg={4} className="login-area">
+          <UserLoginHandler /> {/* This is the user login form */}
+        </Col>
+        <Col md={6} lg={8} className="main-area">
+          {/* Optional: Other content here */}
         </Col>
       </Row>
-      <BottomNav /> {/* Ensure BottomNav is correctly implemented */}
+      <BottomNav />
     </Container>
   );
 };
