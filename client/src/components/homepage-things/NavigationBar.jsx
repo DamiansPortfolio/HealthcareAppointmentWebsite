@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+
+import logo from "../images/logo_v2.png"; // Make sure the path is correct
 import "./Navigation.css";
-import logo from "./images/logo_v2.png"; // Make sure the path is correct
 
 const Navigation = () => {
   const [isActive, setIsActive] = useState(false);
@@ -27,37 +28,37 @@ const Navigation = () => {
         <nav className="cs-nav" role="navigation">
           <ul id="cs-expanded" className="cs-ul" aria-expanded={ariaExpanded}>
             <li className="cs-li">
-              <a href="/" className="cs-li-link cs-active">
+              <a href="/" className="cs-li-link">
                 Home
               </a>
             </li>
             <li className="cs-li">
-              <a href="/about" className="cs-li-link">
+              <a href="/" className="cs-li-link">
                 Locations
               </a>
             </li>
             <li className="cs-li">
-              <a href="/services" className="cs-li-link">
+              <a href="/" className="cs-li-link">
                 Services
               </a>
             </li>
             <li className="cs-li">
-              <a href="/about-us" className="cs-li-link">
+              <a href="/" className="cs-li-link">
                 About Us
               </a>
             </li>
             <li className="cs-li">
-              <a href="/faq" className="cs-li-link">
+              <a href="/" className="cs-li-link">
                 FAQ
+              </a>
+            </li>
+            <li className="cs-li">
+              <a href="/register" className="cs-li-link">
+                Register
               </a>
             </li>
           </ul>
         </nav>
-      </div>
-      <div className="nav-button">
-        <a href="/contact" className="cs-button-solid cs-nav-button">
-          Book Appointment
-        </a>
       </div>
     </header>
   );

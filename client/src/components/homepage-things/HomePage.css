@@ -1,0 +1,181 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  padding-top: 97px;
+  overflow-x: hidden; /* Prevent horizontal overflow if any */
+}
+
+/* HomePage.css */
+.site-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full viewport height */
+  width: 100%;
+  overflow: hidden; /* Prevents content from overflowing */
+}
+
+.homepage-main {
+  flex-grow: 1;
+  padding: 20px 0; /* Adds padding around the main content */
+  overflow: hidden; /* Prevents content from overflowing */
+  background-color: white;
+}
+
+.login-handler {
+  padding: 20px; /* Keeps internal padding for content */
+  margin-bottom: 20px; /* Ensures separation from subsequent content */
+  background: linear-gradient(
+    145deg,
+    #4a4a4a,
+    #2c2c2c
+  ); /* Subtle gradient for depth */
+  color: #ffffff; /* High contrast text color for readability */
+  border: 1px solid #555; /* Slightly darker border for depth */
+  border-radius: 5px; /* Rounded corners for a modern look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for 3D effect */
+  transition: transform 0.3s ease-in-out; /* Smooth transform on hover */
+}
+
+.login-handler input[type="text"],
+.login-handler input[type="password"] {
+  width: 100%; /* Full-width inputs */
+  padding: 8px 10px; /* Adequate padding for touch friendliness */
+  margin-top: 8px; /* Spaced out from other elements */
+  margin-bottom: 8px; /* Same as above */
+  border: 1px solid #777; /* Subtle border */
+  background-color: #f9f9f9; /* Slightly off-white, reduces glare */
+  border-radius: 4px; /* Consistently rounded corners for all inputs */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06); /* Inner shadow for an inset effect */
+  color: #333; /* Dark color for text for contrast against background */
+}
+.login-handler button {
+  padding: 10px 15px; /* Comfortable clicking area */
+  background-color: #0d47a1; /* Vibrant color for primary action */
+  color: white; /* Contrast text color */
+  border: none; /* No border for a modern button look */
+  border-radius: 4px; /* Rounded corners for the button */
+  text-transform: uppercase; /* Makes it more button-like */
+  letter-spacing: 1px; /* More readable spacing */
+  transition: background-color 0.3s ease; /* Smooth color transition on hover */
+  cursor: pointer; /* Indicates it's clickable */
+}
+.login-handler button:hover {
+  background-color: #1565c0; /* Slightly lighter blue on hover */
+}
+.services-info {
+  padding: 20px; /* Adds padding around the main content */
+  margin-bottom: 20px; /* Ensures separation from subsequent content */
+  background: linear-gradient(
+    145deg,
+    #4a4a4a,
+    #2c2c2c
+  ); /* Subtle gradient for depth */
+  color: #ffffff; /* High contrast text color for readability */
+  border: 1px solid #555; /* Slightly darker border for depth */
+  border-radius: 5px; /* Rounded corners for a modern look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for 3D effect */
+  transition: transform 0.3s ease-in-out; /* Smooth transform on hover */
+}
+
+.additional-info-section {
+  padding: 20px;
+  background-color: pink; /* White background for additional info */
+  border: 1px solid #000000; /* Defines boundaries */
+  margin-bottom: auto; /* Separation from footer */
+  margin-top: 10px;
+}
+
+.images-section {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #00aeff; /* Dark blue background */
+  color: white; /* White text */
+  margin-top: auto; /* Pushes footer to the bottom */
+}
+.images-section-2 {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #00fb2a; /* Dark blue background */
+  color: white; /* White text */
+  margin-top: auto; /* Pushes footer to the bottom */
+}
+.more-info {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #fecc00; /* Dark blue background */
+  color: white; /* White text */
+  margin-top: auto; /* Pushes footer to the bottom */
+}
+
+.more-info-2 {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #ff0088; /* Dark blue background */
+  color: white; /* White text */
+  margin-top: auto; /* Pushes footer to the bottom */
+}
+
+/* Footer and NavBar */
+.homepage-footer {
+  display: flex;
+  flex-direction: column; /* Stacks <p> and BottomNavbar vertically */
+  align-items: center; /* Center-align items horizontally */
+  justify-content: space-between; /* Distributes space */
+  text-align: center;
+  padding: 0; /* Override default padding */
+  background-color: #014262; /* Dark blue background */
+  color: white; /* White text */
+  margin-top: auto; /* Pushes footer to the bottom of its container */
+  width: 100%; /* Ensure the footer extends full width */
+  box-sizing: border-box; /* Padding and border included in the height */
+  height: 100px; /* Fixed height */
+}
+
+.homepage-footer p {
+  flex-grow: 0; /* Ensures <p> does not grow to fill space */
+  margin-top: 10px; /* Top margin for spacing */
+  margin-bottom: 0; /* Remove bottom margin */
+}
+
+.bottom-navbar {
+  width: 100%; /* Full width to match the footer */
+  flex-grow: 1; /* Grow to use available space */
+  display: flex; /* Flex to use Bootstrap styles effectively */
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  padding: 0 20px; /* Horizontal padding */
+}
+
+.Navbar {
+  height: 100%; /* Force the Navbar to fill its container */
+  margin-bottom: 0; /* Remove default margin */
+}
+
+.Container,
+.Navbar .container,
+.Navbar .container-fluid {
+  height: 100%; /* Ensure internal Bootstrap containers fill height */
+  padding: 0; /* Remove padding inside the container */
+}
+
+.Nav,
+.me-auto,
+.navbar-nav {
+  height: 100%; /* Full height for nav elements */
+  align-items: center; /* Center links vertically */
+}
+
+.Nav-link,
+.navbar-nav .nav-link {
+  height: 100%; /* Full height for links */
+  display: flex;
+  align-items: center; /* Center text and icons vertically */
+  padding: 0 15px; /* Padding for touch targets */
+}
+
+.Button,
+.navbar .btn {
+  padding: 8px 20px; /* Padding to match design */
+}

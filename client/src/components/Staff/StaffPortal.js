@@ -1,10 +1,12 @@
 import React from "react";
+import NavBar from "./StaffNavigationBar";
+import "../homepage-things/Navigation.css";
+import "../../App.css";
 
 const StaffPortal = () => {
   return (
-    <div>
-      <h1>Staff Portal</h1>
-      {/* Patient portal content goes here */}
+    <div className="staff-page-container">
+      <NavBar />
     </div>
   );
 };

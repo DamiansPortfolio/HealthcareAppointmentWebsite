@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // Ensure the DatePicker CSS is imported
+import NavBar from "./homepage-things/NavigationBar";
 
 import "./RegistrationPage.css";
 
@@ -54,7 +55,7 @@ function RegistrationPage() {
       );
       console.log(response.data); // Log the response data
       alert("Registration Successful");
-      navigate("/login"); // Navigate to login page upon successful registration
+      navigate("/"); // Navigate to home page upon successful registration
     } catch (error) {
       alert(
         "Registration Failed: " +
@@ -66,6 +67,7 @@ function RegistrationPage() {
 
   return (
     <div className="formbold-main-wrapper">
+      <NavBar />
       <div className="formbold-form-wrapper">
         <form onSubmit={handleSubmit}>
           <div className="formbold-form-title">

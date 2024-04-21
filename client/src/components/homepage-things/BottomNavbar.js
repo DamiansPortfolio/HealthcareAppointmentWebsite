@@ -1,9 +1,7 @@
 import React from "react";
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
-import { Link } from "react-router-dom"; // Ensure Link is imported for routing
-import { IoMdMap } from "react-icons/io"; // This icon is for the directions link
-
-import "../App.css";
+import { Link } from "react-router-dom";
+import { IoMdMap } from "react-icons/io";
 
 const BottomNavbar = () => {
   return (

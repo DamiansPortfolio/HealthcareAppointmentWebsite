@@ -1,12 +1,14 @@
 import React from "react";
+import NavBar from "./PatientNavigationBar";
+import "../homepage-things/Navigation.css";
+import "../../App.css";
 
-const PatientPortal = () => {
+const StaffPortal = () => {
   return (
-    <div>
-      <h1>Patient Portal</h1>
-      {/* Patient portal content goes here */}
+    <div className="patient-page-container">
+      <NavBar />
     </div>
   );
 };
 
-export default PatientPortal;
+export default StaffPortal;
