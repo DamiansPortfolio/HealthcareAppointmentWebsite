@@ -159,4 +159,51 @@
     padding: 10px 15px;
     display: block;
   }
+
+  #cs-navigation .locations-offCanvas {
+    /* 14px - 16px */
+    padding: 10px 15px; /* Padding around links */
+    font-size: clamp(0.875rem, 1vw, 1rem);
+    line-height: 1.5em;
+    text-decoration: none;
+    margin: 0;
+    color: var(--bodyTextColor);
+    display: block;
+    position: relative;
+  }
+
+  #cs-navigation .locations-offCanvas:hover:before {
+    width: 100%;
+  }
+  #cs-navigation .locations-offCanvas.cs-active:before {
+    width: 100%;
+  }
+  #cs-navigation .locations-offCanvas:before {
+    /* active state underline */
+    content: "";
+    width: 0%;
+    height: 2px;
+    background: var(--primary);
+    opacity: 1;
+    display: block;
+    position: absolute;
+    bottom: 0rem;
+    left: 0;
+    transition: width 0.3s;
+  }
+  #cs-navigation .locations-offCanvas {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 15px;
+    display: block;
+  }
+
+  #cs-navigation .locations-offCanvas .btn {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 15px;
+    display: block;
+    background-color: white !important;
+    border: none;
+  }
 }

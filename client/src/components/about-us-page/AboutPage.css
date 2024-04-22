@@ -8,7 +8,7 @@ body {
 }
 
 /* HomePage.css */
-.site-container {
+.about-us-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Full viewport height */
@@ -180,4 +180,21 @@ body {
 .Button,
 .navbar .btn {
   padding: 8px 20px; /* Padding to match design */
+}
+
+.about-us-container .background-image {
+  background-size: cover !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.card-custom {
+  height: 400px !important; /* Adjust this value based on your content */
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.card-body-custom {
+  flex-grow: 1 !important;
 }

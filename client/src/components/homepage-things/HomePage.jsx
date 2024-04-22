@@ -23,7 +23,6 @@ const HomePage = () => {
             </Col>
             <Col md={6} className="services-info">
               <h2>Services</h2>
-              <p>Details about services and offerings can go here.</p>
             </Col>
             <Col md={6} className="images-section">
               <h2>Image Information</h2>

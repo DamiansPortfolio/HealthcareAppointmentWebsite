@@ -315,7 +315,6 @@ function RegistrationPage() {
               className="formbold-form-input"
               value={formData.user_type_id}
               onChange={handleChange}
-              required
             />
           </div>
 
