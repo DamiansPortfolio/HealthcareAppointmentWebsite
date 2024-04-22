@@ -205,5 +205,6 @@
     display: block;
     background-color: white !important;
     border: none;
+    box-shadow: none;
   }
 }
