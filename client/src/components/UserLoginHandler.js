@@ -1,20 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; // Necessary for redirection
+import UserContext from "./UserContext";
 
 const UserLoginHandler = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate(); // Initialize the navigation function
+  const { setUser } = useContext(UserContext); // Get the setUser function from the context
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/login", { username, password });
+      const response = await axios.post(
+        "/api/login",
+        { username, password },
+        { withCredentials: true }
+      ); // This allows axios to send cookies
       console.log(response.data); // Log the full response data
       if (response.data.success) {
         const userType = parseInt(response.data.user_type_id, 10); // Ensure it's an integer
+        setUser({ username: response.data.username }); // Set the username in the context
         switch (userType) {
           case 1:
             navigate("/patient-portal");

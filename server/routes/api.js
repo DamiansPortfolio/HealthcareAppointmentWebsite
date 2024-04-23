@@ -73,6 +73,7 @@ router.post("/login", async (req, res) => {
         .json({ success: false, message: "User does not exist" });
     }
     const user = userQueryResult.rows[0];
+
     console.log("User found:", user.username, "Attempting password match...");
     console.log(
       "Submitted password:",
@@ -82,10 +83,21 @@ router.post("/login", async (req, res) => {
     );
 
     if (password === user.password) {
+      const oldSessionID = await req.redisClient.get(
+        `session_${user.username}`
+      );
+      if (oldSessionID) {
+        await req.redisClient.del(oldSessionID);
+      }
+
+      await req.redisClient.set(`session_${user.username}`, req.sessionID); // Ensure this is awaited or handled correctly
+      req.session.userID = user.id;
+
       res.json({
         success: true,
         message: "Login successful",
-        user_type_id: user.user_type_id, // Assuming 'user_type_id' is a column in your 'users' table
+        user_type_id: user.user_type_id,
+        username: user.username, // Assuming 'user_type_id' is a column in your 'users' table
       });
     } else {
       return res
@@ -96,6 +108,22 @@ router.post("/login", async (req, res) => {
     console.error("Login error:", error.message);
     res.status(500).json({ success: false, message: "Server error" });
   }
+});
+
+// User Profile Endpoint
+router.get("/profile", (req, res) => {
+  if (!req.session.ssn) {
+    return res.status(401).json({ success: false, message: "Unauthorized" });
+  }
+
+  res.json({
+    success: true,
+    message: "Profile data retrieved successfully",
+    user: {
+      ssn: req.session.ssn,
+      username: req.session.username,
+    },
+  });
 });
 
 module.exports = router;

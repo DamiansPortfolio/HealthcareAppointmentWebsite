@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import logo from "../images/logo_v2.png"; // Make sure the path is correct
 import "./Navigation.css";
 
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
