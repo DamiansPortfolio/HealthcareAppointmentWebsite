@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { Link } from "react-router-dom"; // Import useHistory directly
+import UserContext from "../UserContext";
+import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import logo from "../images/logo_v2.png"; // Make sure the path is correct
 import "./Navigation.css";
@@ -19,7 +23,29 @@ import hanover from "../images/Hanover.jpg"; // Adjust the path as necessary
 import glenBurnie from "../images/GlenBurnie.jpg"; // Adjust the path as necessary
 
 const Navigation = () => {
+  const { user, setUser } = useContext(UserContext); // Get the user state from the context
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get("/api/current-user", {
+          withCredentials: true,
+        });
+        if (response.data.success) {
+          setUser(response.data.user);
+        } else {
+          setUser(null);
+        }
+      } catch (error) {
+        console.error("Failed to fetch user session", error);
+        setUser(null);
+      }
+    };
+    fetchUser();
+  }, [setUser]);
 
   const toggleClass = () => {
     setIsActive(!isActive);
@@ -27,6 +53,25 @@ const Navigation = () => {
   };
 
   const ariaExpanded = isActive ? "true" : "false";
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post(
+        "/api/logout",
+        {},
+        { withCredentials: true }
+      );
+      if (response.data.success) {
+        setUser(null);
+        navigate("/");
+      } else {
+        alert("Logout failed: " + response.data.message);
+      }
+    } catch (error) {
+      alert("Logout error: " + error.message);
+    }
+  };
+  const onPatientPortal = location.pathname.includes("/patient-portal");
+  const onStaffPortal = location.pathname.includes("/staff-portal");
 
   return (
     <header
@@ -34,50 +79,167 @@ const Navigation = () => {
       className={`cs-container ${isActive ? "cs-active" : ""}`}
     >
       <div className="nav-logo">
-        <a href="/" aria-label="Home">
-          <img src={logo} alt="Company Logo" height="60" />{" "}
-          {/* Adjust logo height as needed */}
-        </a>
+        <Link to="/" aria-label="Home">
+          <img src={logo} alt="Company Logo" height="60" />
+        </Link>
       </div>
       <div className="nav-contents">
         <nav className="cs-nav" role="navigation">
-          <ul id="cs-expanded" className="cs-ul" aria-expanded={ariaExpanded}>
-            <li className="cs-li">
-              <a href="/" className="cs-li-link">
-                Home
-              </a>
-            </li>
-            <li className="cs-li">
-              <a className="locations-offCanvas">
-                {["Locations"].map((placement, idx) => (
-                  <OffCanvasExample
-                    key={idx}
-                    placement={placement}
-                    name={placement}
-                  />
-                ))}
-              </a>
-            </li>
-            <li className="cs-li">
-              <a href="/" className="cs-li-link">
-                Services
-              </a>
-            </li>
-            <li className="cs-li">
-              <a href="/about-us" className="cs-li-link">
-                About Us
-              </a>
-            </li>
-            <li className="cs-li">
-              <a href="/" className="cs-li-link">
-                FAQ
-              </a>
-            </li>
-            <li className="cs-li">
-              <a href="/register" className="cs-li-link">
-                Register
-              </a>
-            </li>
+          <ul className="cs-ul">
+            {onPatientPortal ? (
+              // Patient-specific links
+              <>
+                <li className="cs-li">
+                  <Link to="/patient-portal" className="cs-li-link">
+                    Dashboard
+                  </Link>
+                </li>
+                <li className="cs-li">
+                  <Link to="/patient-portal/schedule" className="cs-li-link">
+                    Schedule Appointment
+                  </Link>
+                </li>
+                <li className="cs-li">
+                  <Link
+                    to="/patient-portal/appointments"
+                    className="cs-li-link"
+                  >
+                    My Appointments
+                  </Link>
+                </li>
+
+                <li className="cs-li">
+                  <Link to="/patient-portal/messages" className="cs-li-link">
+                    Messages
+                  </Link>
+                </li>
+                <li className="cs-li">
+                  <Link to="/patient-portal/reminders" className="cs-li-link">
+                    Reminders
+                  </Link>
+                </li>
+                <li className="cs-li">
+                  <Link to="/patient-portal/help" className="cs-li-link">
+                    Help
+                  </Link>
+                </li>
+                <li className="cs-li">
+                  <Link to="/patient-portal/settings" className="cs-li-link">
+                    Settings
+                  </Link>
+                </li>
+                <li className="cs-li">
+                  <Link onClick={handleLogout} className="cs-li-link">
+                    Logout
+                  </Link>
+                </li>
+              </>
+            ) : onStaffPortal ? (
+              // Staff-specific links
+              <>
+                <li className="cs-li">
+                  <Link to="/staff-portal" className="cs-li-link">
+                    Dashboard
+                  </Link>
+                </li>
+                <li className="cs-li">
+                  <Link to="/staff-portal/appointments" className="cs-li-link">
+                    Appointments
+                  </Link>
+                </li>
+                <li className="cs-li">
+                  <Link to="/staff-portal/patients" className="cs-li-link">
+                    Patients
+                  </Link>
+                </li>
+                <li className="cs-li">
+                  <Link to="/staff-portal/schedule" className="cs-li-link">
+                    Schedule
+                  </Link>
+                </li>
+                <li className="cs-li">
+                  <Link to="/staff-portal/messages" className="cs-li-link">
+                    Messages
+                  </Link>
+                </li>
+                <li className="cs-li">
+                  <Link to="/staff-portal/help" className="cs-li-link">
+                    Help
+                  </Link>
+                </li>
+                <li className="cs-li">
+                  <Link to="/staff-portal/settings" className="cs-li-link">
+                    Settings
+                  </Link>
+                </li>
+                <li className="cs-li">
+                  <Link onClick={handleLogout} className="cs-li-link">
+                    Logout
+                  </Link>
+                </li>
+              </>
+            ) : (
+              // General links
+              <>
+                <li className="cs-li">
+                  <Link to="/" className="cs-li-link">
+                    Home
+                  </Link>
+                </li>
+                <li className="cs-li">
+                  <Link to="/about-us" className="cs-li-link">
+                    About Us
+                  </Link>
+                </li>
+                <li className="cs-li">
+                  <Link to="/services" className="cs-li-link">
+                    Services
+                  </Link>
+                </li>
+                <li className="cs-li">
+                  <Link
+                    to="/locations"
+                    className="locations-offCanvas cs-li-link"
+                  >
+                    Locations
+                  </Link>
+                </li>
+                <li className="cs-li">
+                  <Link to="/faq" className="cs-li-link">
+                    FAQ
+                  </Link>
+                </li>
+                {user ? (
+                  <>
+                    {user.user_type_id === 1 && (
+                      <li className="cs-li">
+                        <Link to="/patient-portal" className="cs-li-link">
+                          Patient Portal
+                        </Link>
+                      </li>
+                    )}
+                    {user.user_type_id === 2 && (
+                      <li className="cs-li">
+                        <Link to="/staff-portal" className="cs-li-link">
+                          Staff Portal
+                        </Link>
+                      </li>
+                    )}
+                    <li className="cs-li">
+                      <Link onClick={handleLogout} className="cs-li-link">
+                        Logout
+                      </Link>
+                    </li>
+                  </>
+                ) : (
+                  <li className="cs-li">
+                    <Link to="/register" className="cs-li-link">
+                      Register
+                    </Link>
+                  </li>
+                )}
+              </>
+            )}
           </ul>
         </nav>
       </div>

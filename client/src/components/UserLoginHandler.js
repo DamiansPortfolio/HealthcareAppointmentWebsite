@@ -21,16 +21,19 @@ const UserLoginHandler = () => {
       console.log(response.data); // Log the full response data
       if (response.data.success) {
         const userType = parseInt(response.data.user_type_id, 10); // Ensure it's an integer
-        setUser({ username: response.data.username }); // Set the username in the context
+        setUser({
+          username: response.data.username,
+          user_type_id: response.data.user_type_id,
+        }); // Set the username in the context  // Set the user type in the context
         switch (userType) {
           case 1:
-            navigate("/patient-portal");
+            navigate("/");
             break;
           case 2:
-            navigate("/staff-portal");
+            navigate("/");
             break;
           case 3:
-            navigate("/manager-portal");
+            navigate("/");
             break;
           default:
             alert("Invalid user type: " + response.data.user_type_id); // Alert invalid user type
