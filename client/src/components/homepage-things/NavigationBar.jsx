@@ -27,25 +27,37 @@ const Navigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isActive, setIsActive] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get("/api/current-user", {
-          withCredentials: true,
-        });
-        if (response.data.success) {
-          setUser(response.data.user);
+    setIsLoading(true);
+    axios
+      .get("/api/current-user", { withCredentials: true })
+      .then((response) => {
+        if (response.data.success && response.data.user) {
+          // Explicitly check for user_type_id presence
+          if (response.data.user.user_type_id) {
+            setUser(response.data.user);
+          } else {
+            console.error("User data is missing 'user_type_id'");
+            setUser(null);
+          }
         } else {
           setUser(null);
         }
-      } catch (error) {
+      })
+      .catch((error) => {
         console.error("Failed to fetch user session", error);
         setUser(null);
-      }
-    };
-    fetchUser();
+      })
+      .finally(() => setIsLoading(false));
   }, [setUser]);
+
+  // Add this useEffect to monitor user changes and manage loading state
+  useEffect(() => {
+    console.log("Current user state:", user);
+    setIsLoading(false); // Update the loading state based on user state changes
+  }, [user]); // Depend on user to re-trigger this effect
 
   const toggleClass = () => {
     setIsActive(!isActive);
@@ -70,8 +82,16 @@ const Navigation = () => {
       alert("Logout error: " + error.message);
     }
   };
+
+  if (isLoading) return <p>Loading...</p>; // Render loading indicator while user info is fetching
+
   const onPatientPortal = location.pathname.includes("/patient-portal");
   const onStaffPortal = location.pathname.includes("/staff-portal");
+
+  // Consider user type to determine navigation links
+  const userType = user ? user.user_type_id : null;
+  const isPatient = userType === 1;
+  const isStaff = userType === 2;
 
   return (
     <header
@@ -197,19 +217,22 @@ const Navigation = () => {
                   </Link>
                 </li>
                 <li className="cs-li">
-                  <Link
-                    to="/locations"
-                    className="locations-offCanvas cs-li-link"
-                  >
-                    Locations
-                  </Link>
+                  <a className="locations-offCanvas">
+                    {["Locations"].map((placement, idx) => (
+                      <OffCanvasExample
+                        key={idx}
+                        placement={placement}
+                        name={placement}
+                      />
+                    ))}
+                  </a>
                 </li>
                 <li className="cs-li">
                   <Link to="/faq" className="cs-li-link">
                     FAQ
                   </Link>
                 </li>
-                {user ? (
+                {!isLoading && user ? (
                   <>
                     {user.user_type_id === 1 && (
                       <li className="cs-li">

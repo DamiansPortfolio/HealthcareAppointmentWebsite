@@ -134,19 +134,20 @@ router.post("/login", async (req, res) => {
         `session_${user.username}`,
         req.sessionID,
         "EX",
-        30
+        1800
       );
       console.log(`New session set for ${user.username}: ${req.sessionID}`);
 
       req.session.userID = user.id;
       req.session.username = user.username;
+      req.session.user_type_id = user.user_type_id;
       req.session.ssn = user.ssn;
 
       res.json({
         success: true,
         message: "Login successful",
-        user_type_id: user.user_type_id,
         username: user.username,
+        user_type_id: user.user_type_id,
       });
     } else {
       return res
@@ -204,25 +205,28 @@ router.post("/logout", async (req, res) => {
 
 // Get current user session
 router.get("/current-user", (req, res) => {
-  if (req.session && req.session.username) {
-    //Refresh the Redis session expiration time on each access
+  if (
+    req.session &&
+    req.session.username &&
+    req.session.user_type_id !== undefined
+  ) {
+    // Confirm the session contains all necessary data
     req.redisClient.expire(`session_${req.session.username}`, 1800); // Extend session TTL for 30 minutes
-    // If theres a session and it has a username, return the user info
     res.json({
       success: true,
-      message: "Current user session",
+      message: "Current user session retrieved successfully",
       user: {
         username: req.session.username,
         user_type_id: req.session.user_type_id,
       },
     });
   } else {
-    // No user logged in
+    // Incomplete session data or no user logged in
+    console.error("Incomplete session data:", req.session);
     res.status(401).json({
       success: false,
-      message: "No active session",
+      message: "No active session or incomplete user data",
     });
   }
 });
-
 module.exports = router;
