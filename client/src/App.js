@@ -8,6 +8,7 @@ import RegistrationPage from "./components/RegistrationPage";
 import AboutPage from "./components/about-us-page/AboutPage";
 import ServicesPage from "./components/homepage-things/ServicesPage";
 import StaffDashboard from "./components/Staff/StaffDashboard";
+import AppointmentsPage from "./components/appointments/AppointmentsPage";
 
 function App() {
   return (
@@ -21,6 +22,10 @@ function App() {
           <Route path="/about-us" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/staff-portal/dashboard" element={<StaffDashboard />} />
+          <Route
+            path="/staff-portal/appointments"
+            element={<AppointmentsPage />}
+          />
         </Routes>
       </UserProvider>
     </Router>

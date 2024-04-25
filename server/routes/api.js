@@ -231,4 +231,58 @@ router.get("/current-user", (req, res) => {
     });
   }
 });
+
+// Get all appointments
+router.get("/appointments", async (req, res) => {
+  try {
+    const allAppointments = await pool.query("SELECT * FROM appointment");
+    res.json(allAppointments.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+// Add an appointment
+router.post("/appointments", async (req, res) => {
+  const { date, time, type, location, patient_ssn } = req.body;
+  try {
+    const newAppointment = await pool.query(
+      "INSERT INTO appointment (appointment_id, date, time, type, location, patient_ssn) VALUES (gen_random_uuid(), $1, $2, $3, $4, $5) RETURNING *",
+      [date, time, type, location, patient_ssn]
+    );
+    res.json(newAppointment.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+// Update an appointment
+router.put("/appointments/:id", async (req, res) => {
+  const { id } = req.params;
+  const { date, time, type, location, patient_ssn } = req.body;
+  try {
+    const updateAppointment = await pool.query(
+      "UPDATE appointment SET date = $1, time = $2, type = $3, location = $4, patient_ssn = $5 WHERE appointment_id = $6 RETURNING *",
+      [date, time, type, location, patient_ssn, id]
+    );
+    res.json(updateAppointment.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+// Delete an appointment
+router.delete("/appointments/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    await pool.query("DELETE FROM appointment WHERE appointment_id = $1", [id]);
+    res.json({ message: "Appointment deleted" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
 module.exports = router;
