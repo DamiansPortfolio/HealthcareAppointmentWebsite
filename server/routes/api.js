@@ -49,11 +49,12 @@ router.post("/register", async (req, res) => {
     email,
     facility_number,
     ssn,
+    user_type_id,
   } = req.body;
 
   try {
     const newUser = await pool.query(
-      "INSERT INTO users (username, password, first_name, middle_name, last_name, sex, date_of_birth, phone_number, street, city, state, zip_code, email, facility_number, ssn) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *",
+      "INSERT INTO users (username, password, first_name, middle_name, last_name, sex, date_of_birth, phone_number, street, city, state, zip_code, email, facility_number, ssn, user_type_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING *",
       [
         username,
         password, // Directly using the unhashed password for simplicity during tests
@@ -70,6 +71,7 @@ router.post("/register", async (req, res) => {
         email,
         facility_number,
         ssn,
+        user_type_id,
       ]
     );
     res.json({

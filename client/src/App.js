@@ -7,6 +7,7 @@ import StaffPortal from "./components/Staff/StaffPortal";
 import RegistrationPage from "./components/RegistrationPage";
 import AboutPage from "./components/about-us-page/AboutPage";
 import ServicesPage from "./components/homepage-things/ServicesPage";
+import StaffDashboard from "./components/Staff/StaffDashboard";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/about-us" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/staff-portal/dashboard" element={<StaffDashboard />} />
         </Routes>
       </UserProvider>
     </Router>

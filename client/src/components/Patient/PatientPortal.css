@@ -1,0 +1,9 @@
+/* PatientPortal.css */
+
+.fullscreen-carousel {
+  margin-top: relative; /* Adjust this value to match the height of your Navbar */
+}
+
+.button-spacing {
+  margin-bottom: 40px; /* Adjust the value as needed */
+}

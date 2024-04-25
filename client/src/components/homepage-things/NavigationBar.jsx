@@ -115,8 +115,8 @@ const Navigation = () => {
                   </Link>
                 </li>
                 <li className="cs-li">
-                  <Link to="/patient-portal/schedule" className="cs-li-link">
-                    Schedule Appointment
+                  <Link to="/patient-portal/my-profile" className="cs-li-link">
+                    My Profile
                   </Link>
                 </li>
                 <li className="cs-li">
@@ -127,15 +127,9 @@ const Navigation = () => {
                     My Appointments
                   </Link>
                 </li>
-
                 <li className="cs-li">
                   <Link to="/patient-portal/messages" className="cs-li-link">
                     Messages
-                  </Link>
-                </li>
-                <li className="cs-li">
-                  <Link to="/patient-portal/reminders" className="cs-li-link">
-                    Reminders
                   </Link>
                 </li>
                 <li className="cs-li">
@@ -159,6 +153,11 @@ const Navigation = () => {
               <>
                 <li className="cs-li">
                   <Link to="/staff-portal" className="cs-li-link">
+                    Home
+                  </Link>
+                </li>
+                <li className="cs-li">
+                  <Link to="/staff-portal/dashboard" className="cs-li-link">
                     Dashboard
                   </Link>
                 </li>
@@ -174,7 +173,7 @@ const Navigation = () => {
                 </li>
                 <li className="cs-li">
                   <Link to="/staff-portal/schedule" className="cs-li-link">
-                    Schedule
+                    My Schedule
                   </Link>
                 </li>
                 <li className="cs-li">
