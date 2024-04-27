@@ -181,3 +181,16 @@ body {
 .navbar .btn {
   padding: 8px 20px; /* Padding to match design */
 }
+
+.button-container {
+  position: absolute;
+  top: 86%;
+  right: 8%;
+  transform: translateY(-50%);
+}
+
+.custom-button {
+  width: 850px;
+  height: 60;
+  font-size: 25px;
+}

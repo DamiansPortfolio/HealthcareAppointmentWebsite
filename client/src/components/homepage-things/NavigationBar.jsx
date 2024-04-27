@@ -110,7 +110,7 @@ const Navigation = () => {
               // Patient-specific links
               <>
                 <li className="cs-li">
-                  <Link to="/patient-portal" className="cs-li-link">
+                  <Link to="/patient-portal/dashboard" className="cs-li-link">
                     Dashboard
                   </Link>
                 </li>
@@ -226,11 +226,7 @@ const Navigation = () => {
                     ))}
                   </a>
                 </li>
-                <li className="cs-li">
-                  <Link to="/faq" className="cs-li-link">
-                    FAQ
-                  </Link>
-                </li>
+
                 {!isLoading && user ? (
                   <>
                     {user.user_type_id === 1 && (

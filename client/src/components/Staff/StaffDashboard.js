@@ -1,10 +1,37 @@
-import React from "react";
 import NavBar from "../homepage-things/NavigationBar";
 import "./StaffPortal.css";
-import { Card, CardGroup, Table, Form, Toast } from "react-bootstrap";
 import doc from "../images/doc.webp";
+import React, { useState, useEffect } from "react";
+import TasksList from "./TasksList";
+import CreateTaskForm from "./CreateTaskForm";
+import axios from "axios";
+
+import { Card, CardGroup, Table, Toast, Button } from "react-bootstrap";
 
 const StaffDashboard = () => {
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  const fetchTasks = async () => {
+    try {
+      const response = await axios.get("/api/tasks");
+      setTasks(response.data);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+    }
+  };
+
+  const handleMarkAsComplete = async (taskId) => {
+    try {
+      await axios.put(`/api/tasks/${taskId}/complete`);
+      fetchTasks(); // Fetch updated tasks after marking a task as complete
+    } catch (error) {
+      console.error("Error marking task as complete:", error);
+    }
+  };
   return (
     <div>
       {/* NavBar */}
@@ -108,25 +135,11 @@ const StaffDashboard = () => {
             <Card.Title> Task List </Card.Title>
           </Card.Header>
           <Card.Body>
-            {/* Display the task list with checkboxes */}
-            <Form>
-              {/* Task 1 */}
-              <div key={`task-1`} className="mb-3">
-                <Form.Check type="checkbox" id={`task-1`} label={`Task 1`} />
-              </div>
-              {/* Task 2 */}
-              <div key={`task-2`} className="mb-3">
-                <Form.Check type="checkbox" id={`task-2`} label={`Task 2`} />
-              </div>
-              {/* Task 3 */}
-              <div key={`task-3`} className="mb-3">
-                <Form.Check type="checkbox" id={`task-3`} label={`Task 3`} />
-              </div>
-              {/* Task 4 */}
-              <div key={`task-4`} className="mb-3">
-                <Form.Check type="checkbox" id={`task-4`} label={`Task 4`} />
-              </div>
-            </Form>
+            <TasksList
+              tasks={tasks}
+              handleMarkAsComplete={handleMarkAsComplete}
+            />
+            <CreateTaskForm fetchTasks={fetchTasks} />
           </Card.Body>
         </Card>
 

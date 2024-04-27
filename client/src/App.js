@@ -9,12 +9,17 @@ import AboutPage from "./components/about-us-page/AboutPage";
 import ServicesPage from "./components/homepage-things/ServicesPage";
 import StaffDashboard from "./components/Staff/StaffDashboard";
 import AppointmentsPage from "./components/appointments/AppointmentsPage";
+import PatientDashboard from "./components/Patient/PatientDashboard";
 
 function App() {
   return (
     <Router>
       <UserProvider>
         <Routes>
+          <Route
+            path="/patient-portal/dashboard"
+            element={<PatientDashboard />}
+          />
           <Route path="/" element={<HomePage />} />
           <Route path="/patient-portal" element={<PatientPortal />} />
           <Route path="/staff-portal" element={<StaffPortal />} />
@@ -23,7 +28,7 @@ function App() {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/staff-portal/dashboard" element={<StaffDashboard />} />
           <Route
-            path="/staff-portal/appointments"
+            path="/patient-portal/appointments"
             element={<AppointmentsPage />}
           />
         </Routes>

@@ -1,3 +1,12 @@
 .card-content-center {
   text-align: center;
 }
+.modal-dialog {
+  margin: 50px auto; /* Adjust the margin to position the modal vertically */
+  max-width: 80%; /* Adjust the maximum width of the modal */
+}
+
+.modal-content {
+  height: 80%; /* Adjust the height of the modal content */
+  overflow-y: auto; /* Enable vertical scrolling if content exceeds the height */
+}
