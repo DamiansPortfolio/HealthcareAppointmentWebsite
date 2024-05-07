@@ -12,6 +12,9 @@ import {
   Button,
 } from "react-bootstrap";
 import patient from "../images/patient.png";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
 
 const PatientDashboard = () => {
   return (
@@ -102,12 +105,13 @@ const PatientDashboard = () => {
         {/* Card 3: Calendar / Schedule */}
         <Card>
           <Card.Header className="card-content-center">
-            <Card.Title> Doctor Appointments </Card.Title>
+            <Card.Title>Calendar</Card.Title>
           </Card.Header>
           <Card.Body>
-            <Card.Text>
-              <p>Calendar goes here</p>
-            </Card.Text>
+            <FullCalendar
+              plugins={[dayGridPlugin, interactionPlugin]}
+              initialView="dayGridMonth"
+            />
           </Card.Body>
         </Card>
       </CardGroup>

@@ -23,6 +23,8 @@ import loc from "../images/loc.png";
 import services from "../images/services.png";
 import us from "../images/us.png";
 
+import { useUser } from "../UserContext"; // Import useUser hook
+
 //icons
 import {
   FaFacebook,
@@ -34,19 +36,21 @@ import {
 } from "react-icons/fa";
 
 const HomePage = () => {
+  const { user } = useUser(); // Use the useUser hook to access user state
+
   return (
     <div>
       <NavBar />
       <Container fluid>
         <Row>
           <Col xs={3} className="d-flex flex-column justify-content-between">
-            <div className="login-box">
-              <UserLoginHandler />
-            </div>
+            <div className="login-box">{!user && <UserLoginHandler />} </div>
             <div></div> {/* Spacer */}
           </Col>
-          <Col className="p-0">
-            <Carousel>
+          <Col className="p-0" xs={user ? 12 : 9}>
+            <Carousel
+              className={user ? "full-width-carousel" : "default-carousel"}
+            >
               <Carousel.Item>
                 <div style={{ width: "93%", margin: "auto" }}>
                   <img className="d-block w-100" src={welcome} />

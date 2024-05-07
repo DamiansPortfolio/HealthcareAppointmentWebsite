@@ -10,11 +10,15 @@ import rmd from "../images/rmd.png";
 import pdash from "../images/pdash.png";
 import settings from "../images/settings.png";
 import help from "../images/help.png";
+import WelcomeMessage from "../homepage-things/WelcomeMessage";
 
 function PatientWelcome() {
   return (
     <>
       <NavBar />
+      <div style={{ textAlign: "center" }}>
+        <WelcomeMessage />
+      </div>
       <div className="fullscreen-carousel">
         <Carousel>
           <Carousel.Item interval={1000}>

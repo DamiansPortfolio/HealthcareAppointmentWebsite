@@ -1,5 +1,13 @@
 import React, { useState, useContext } from "react";
-import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Container,
+  Row,
+  Col,
+  Card,
+  Spinner,
+} from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "./UserContext"; // Adjust import if you are using a custom hook or keep useContext if not
@@ -15,9 +23,12 @@ const UserLoginHandler = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { setUser } = useUser(); // Change to useUser if you've created a custom hook, or keep useContext(UserContext) if directly using context
+  const [loading, setLoading] = useState(false); // State to manage loading
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading before the API call
+
     try {
       const response = await axios.post(
         "/api/login",
@@ -41,16 +52,17 @@ const UserLoginHandler = () => {
         : "Login failed with network or server error.";
       alert(message); // Display network or server error message
     }
+    setLoading(false); // End loading after the API call
   };
 
   // Helper function to navigate based on user type
   const navigateBasedOnUserType = (userType) => {
     switch (parseInt(userType, 10)) {
       case 1:
-        navigate("/"); // Modify as necessary
+        navigate("/patient-portal"); // Modify as necessary
         break;
       case 2:
-        navigate("/"); // Assuming this for normal users
+        navigate("/staff-portal"); // Assuming this for normal users
         break;
       case 3:
         navigate("/"); // Assuming this for admin users
@@ -87,7 +99,17 @@ const UserLoginHandler = () => {
               />
             </Form.Group>
             <Button variant="primary" type="submit" className="mt-3">
-              Login
+              {loading ? (
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+              ) : (
+                "Login"
+              )}
             </Button>
           </Form>
         </Card.Body>

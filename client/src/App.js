@@ -10,6 +10,7 @@ import ServicesPage from "./components/homepage-things/ServicesPage";
 import StaffDashboard from "./components/Staff/StaffDashboard";
 import AppointmentsPage from "./components/appointments/AppointmentsPage";
 import PatientDashboard from "./components/Patient/PatientDashboard";
+import FutureImplementation from "./components/homepage-things/FutureImplementation";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             path="/patient-portal/appointments"
             element={<AppointmentsPage />}
           />
+          <Route path="*" element={<FutureImplementation />} />
         </Routes>
       </UserProvider>
     </Router>

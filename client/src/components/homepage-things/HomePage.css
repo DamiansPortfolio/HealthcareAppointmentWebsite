@@ -190,7 +190,21 @@ body {
 }
 
 .custom-button {
-  width: 850px;
+  width: 1110px;
   height: 60;
   font-size: 25px;
+}
+
+.full-width-carousel {
+  width: 100%;
+}
+
+.default-carousel {
+  width: 100%;
+}
+
+.full-width-carousel .custom-button {
+  width: 100% !important;
+  text-align: center;
+  margin: auto;
 }

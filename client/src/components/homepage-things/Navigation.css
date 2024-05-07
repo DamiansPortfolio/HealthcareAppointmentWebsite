@@ -208,3 +208,12 @@
     box-shadow: none;
   }
 }
+
+/* Navigation.css */
+.welcome-message {
+  animation: fadeInOut 3s;
+}
+
+.user-info {
+  float: right; /* Positioning the user info on the right */
+}

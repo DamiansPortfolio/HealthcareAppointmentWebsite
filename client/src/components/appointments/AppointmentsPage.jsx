@@ -1,6 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
 import NavBar from "../homepage-things/NavigationBar";
-import { Card, CardGroup, Form } from "react-bootstrap";
+import {
+  Card,
+  CardGroup,
+  Form,
+  Badge,
+  ListGroup,
+  Button,
+} from "react-bootstrap";
 import FacilitySelector from "./FacilitySelector";
 import DepartmentSelector from "./DepartmentSelector";
 import DoctorSelector from "./DoctorSelector";
@@ -144,11 +151,64 @@ const StaffDashboard = () => {
             )}
           </Card.Body>
         </Card>
+        {/* Card 2: My Reports */}
         <Card>
           <Card.Header className="card-content-center">
-            <Card.Title>Upcoming Appointments</Card.Title>
+            <Card.Title>
+              Upcoming Appointments <Badge bg="primary"> 4 </Badge>
+            </Card.Title>
           </Card.Header>
-          <Card.Body></Card.Body>
+          <Card.Body>
+            <ListGroup variant="flush">
+              <ListGroup.Item className="d-flex justify-content-between align-items-center">
+                <div>
+                  Wound Care - Towson
+                  <br />
+                  <small>March 5, 2024</small>
+                  <br />
+                </div>
+                <Button variant="primary" size="sm">
+                  View
+                </Button>
+              </ListGroup.Item>
+
+              <ListGroup.Item className="d-flex justify-content-between align-items-center">
+                <div>
+                  Vascular - White Marsh
+                  <br />
+                  <small>March 21, 2024</small>
+                  <br />
+                </div>
+                <Button variant="primary" size="sm">
+                  View
+                </Button>
+              </ListGroup.Item>
+
+              <ListGroup.Item className="d-flex justify-content-between align-items-center">
+                <div>
+                  Checkup - Towson
+                  <br />
+                  <small>April 2, 2024</small>
+                  <br />
+                </div>
+                <Button variant="primary" size="sm">
+                  View
+                </Button>
+              </ListGroup.Item>
+
+              <ListGroup.Item className="d-flex justify-content-between align-items-center">
+                <div>
+                  Checkup - White Marsh
+                  <br />
+                  <small>April 15, 2024</small>
+                  <br />
+                </div>
+                <Button variant="primary" size="sm">
+                  View
+                </Button>
+              </ListGroup.Item>
+            </ListGroup>
+          </Card.Body>
         </Card>
         <Card>
           <Card.Header className="card-content-center">

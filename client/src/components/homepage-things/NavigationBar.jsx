@@ -21,6 +21,7 @@ import cockeysville from "../images/Cockeysville.jpg"; // Adjust the path as nec
 import essex from "../images/Essex.jpg"; // Adjust the path as necessary
 import hanover from "../images/Hanover.jpg"; // Adjust the path as necessary
 import glenBurnie from "../images/GlenBurnie.jpg"; // Adjust the path as necessary
+import ShowUsername from "./ShowUsername"; // Ensure the path is correct
 
 const Navigation = () => {
   const { user, setUser } = useContext(UserContext); // Get the user state from the context
@@ -258,6 +259,13 @@ const Navigation = () => {
                 )}
               </>
             )}
+            <div
+              style={{
+                fontSize: "20px",
+              }}
+            >
+              {user && `User: ${user.username}`}
+            </div>
           </ul>
         </nav>
       </div>
